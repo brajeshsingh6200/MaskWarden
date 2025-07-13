@@ -4,11 +4,13 @@ Mask Detection Module using trained CNN model
 
 import cv2
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.models import load_model
-from config import Config
 import logging
 import os
+from config import Config
+
+# Disable TensorFlow temporarily due to NumPy compatibility issues
+TF_AVAILABLE = False
+print("TensorFlow disabled due to NumPy compatibility issues. Please train/use a pre-trained model later.")
 
 class MaskDetector:
     """Class for detecting face masks using trained CNN model"""
@@ -21,6 +23,10 @@ class MaskDetector:
     def load_model(self):
         """Load the trained mask detection model"""
         try:
+            if not TF_AVAILABLE:
+                self.logger.warning("TensorFlow not available. Model loading skipped.")
+                return
+                
             if not os.path.exists(Config.MODEL_PATH):
                 self.logger.warning(f"Model file not found: {Config.MODEL_PATH}")
                 self.logger.info("Please train the model first using model_trainer.py")
@@ -44,7 +50,7 @@ class MaskDetector:
             Tuple of (prediction, confidence)
         """
         try:
-            if self.model is None:
+            if not TF_AVAILABLE or self.model is None:
                 return "Unknown", 0.0
                 
             if face_image is None:

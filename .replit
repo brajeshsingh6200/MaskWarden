@@ -20,6 +20,10 @@ args = "Face Mask Detection System"
 task = "workflow.run"
 args = "face_mask_detection"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Web Face Mask Detection"
+
 [[workflows.workflow]]
 name = "Face Mask Detection System"
 author = "agent"
@@ -35,3 +39,16 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pip install opencv-python tensorflow pillow numpy matplotlib && python main.py"
+
+[[workflows.workflow]]
+name = "Web Face Mask Detection"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python web_app.py"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
