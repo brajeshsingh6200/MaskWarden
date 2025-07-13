@@ -1,0 +1,592 @@
+{% extends "base.html" %}
+
+{% block title %}Careers - Join Our Team - Nextwave{% endblock %}
+
+{% block content %}
+<!-- Careers Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Join Our Team</h1>
+                <p class="lead mb-4">
+                    Build your career with us and be part of a team that's shaping the future of technology.
+                    We're always looking for talented individuals who share our passion for innovation.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search and Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <form method="GET" class="d-flex gap-3 align-items-end flex-wrap">
+                    <div class="flex-grow-1">
+                        <label for="search" class="form-label">Search Jobs</label>
+                        <input type="text" class="form-control" id="search" name="search" 
+                               value="{{ search_query }}" placeholder="Search by job title or description...">
+                    </div>
+                    <div class="flex-shrink-0">
+                        <label for="department" class="form-label">Department</label>
+                        <select class="form-select" id="department" name="department">
+                            <option value="">All Departments</option>
+                            {% for dept in departments %}
+                            <option value="{{ dept.department }}" 
+                                    {% if department_filter == dept.department %}selected{% endif %}>
+                                {{ dept.department }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <label for="location" class="form-label">Location</label>
+                        <select class="form-select" id="location" name="location">
+                            <option value="">All Locations</option>
+                            {% for loc in locations %}
+                            <option value="{{ loc.location }}" 
+                                    {% if location_filter == loc.location %}selected{% endif %}>
+                                {{ loc.location }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Job Listings Section -->
+<section class="py-5">
+    <div class="container">
+        {% if jobs %}
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3>Open Positions ({{ jobs|length }})</h3>
+                    <div class="text-muted">
+                        <i class="fas fa-briefcase"></i> Full-time positions available
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for job in jobs %}
+            <div class="col-12 mb-4">
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <h4 class="job-title">{{ job.title }}</h4>
+                            <div class="job-meta">
+                                <span>
+                                    <i class="fas fa-building"></i> {{ job.department }}
+                                </span>
+                                <span>
+                                    <i class="fas fa-map-marker-alt"></i> {{ job.location }}
+                                </span>
+                                <span>
+                                    <i class="fas fa-clock"></i> {{ job.type }}
+                                </span>
+                                {% if job.salary_range %}
+                                <span>
+                                    <i class="fas fa-dollar-sign"></i> {{ job.salary_range }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="job-badge">
+                            <span class="badge bg-success">Open</span>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        <p>{{ job.description[:200] }}...</p>
+                    </div>
+                    
+                    <div class="job-actions">
+                        <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn btn-primary">
+                            View Details
+                        </a>
+                        <a href="{{ url_for('apply_job', job_id=job.id) }}" class="btn btn-outline-primary">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No positions found</h4>
+                <p class="text-muted">
+                    {% if search_query or department_filter or location_filter %}
+                    Try adjusting your search criteria or browse all positions.
+                    {% else %}
+                    We don't have any open positions right now, but we're always looking for great talent.
+                    {% endif %}
+                </p>
+                {% if search_query or department_filter or location_filter %}
+                <a href="{{ url_for('careers') }}" class="btn btn-primary">
+                    <i class="fas fa-list"></i> View All Jobs
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Why Work With Us Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Why Work With Us?</h2>
+                <p class="section-subtitle">
+                    We believe in creating an environment where our team can thrive and grow.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket text-primary"></i>
+                    </div>
+                    <h4>Innovation & Growth</h4>
+                    <p>Work on cutting-edge projects and continuously learn new technologies while advancing your career.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-balance-scale text-primary"></i>
+                    </div>
+                    <h4>Work-Life Balance</h4>
+                    <p>Flexible working hours, remote work options, and generous vacation time to maintain a healthy balance.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users text-primary"></i>
+                    </div>
+                    <h4>Great Team Culture</h4>
+                    <p>Collaborative environment with supportive colleagues who celebrate each other's successes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Employee Benefits</h2>
+                <p class="section-subtitle">
+                    We offer competitive benefits to support your health, happiness, and financial well-being.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="benefit-card">
+                    <div class="benefit-list">
+                        <h5><i class="fas fa-heart text-primary me-2"></i>Health & Wellness</h5>
+                        <ul>
+                            <li>Comprehensive health insurance</li>
+                            <li>Dental and vision coverage</li>
+                            <li>Mental health support</li>
+                            <li>Gym membership reimbursement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="benefit-card">
+                    <div class="benefit-list">
+                        <h5><i class="fas fa-piggy-bank text-primary me-2"></i>Financial Benefits</h5>
+                        <ul>
+                            <li>Competitive salary</li>
+                            <li>Performance bonuses</li>
+                            <li>Retirement savings plan</li>
+                            <li>Stock options</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="benefit-card">
+                    <div class="benefit-list">
+                        <h5><i class="fas fa-graduation-cap text-primary me-2"></i>Professional Development</h5>
+                        <ul>
+                            <li>Learning & development budget</li>
+                            <li>Conference attendance</li>
+                            <li>Certification reimbursement</li>
+                            <li>Mentorship programs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="benefit-card">
+                    <div class="benefit-list">
+                        <h5><i class="fas fa-calendar-alt text-primary me-2"></i>Time Off & Flexibility</h5>
+                        <ul>
+                            <li>Unlimited PTO policy</li>
+                            <li>Remote work options</li>
+                            <li>Flexible working hours</li>
+                            <li>Sabbatical opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Application Process Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Application Process</h2>
+                <p class="section-subtitle">
+                    Our hiring process is designed to be fair, transparent, and efficient.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt text-primary"></i>
+                    </div>
+                    <h5>Apply Online</h5>
+                    <p>Submit your application through our online portal with your resume and cover letter.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-phone text-primary"></i>
+                    </div>
+                    <h5>Phone Screen</h5>
+                    <p>Initial phone conversation with our HR team to discuss your background and interests.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-users text-primary"></i>
+                    </div>
+                    <h5>Team Interview</h5>
+                    <p>Meet with potential team members and discuss technical skills and cultural fit.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-handshake text-primary"></i>
+                    </div>
+                    <h5>Offer & Onboarding</h5>
+                    <p>Receive an offer and start your journey with our comprehensive onboarding program.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Ready to Join Our Team?</h2>
+                <p class="lead mb-4">
+                    Don't see a position that matches your skills? Send us your resume anyway - we're always looking for great talent.
+                </p>
+                <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-envelope"></i> Send Resume
+                </a>
+                <a href="#" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-bell"></i> Job Alerts
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-submit form when filters change
+document.getElementById('department').addEventListener('change', function() {
+    this.form.submit();
+});
+
+document.getElementById('location').addEventListener('change', function() {
+    this.form.submit();
+});
+
+// Job alert subscription
+function subscribeToJobAlerts() {
+    const email = prompt('Enter your email address to receive job alerts:');
+    if (email && NextwaveJS.validateEmail(email)) {
+        NextwaveJS.showNotification('Thank you! You will receive job alerts at ' + email, 'success');
+    } else if (email) {
+        NextwaveJS.showNotification('Please enter a valid email address', 'danger');
+    }
+}
+
+// Add event listener to job alerts button
+document.addEventListener('DOMContentLoaded', function() {
+    const jobAlertsBtn = document.querySelector('[href="#"]:has(i.fa-bell)');
+    if (jobAlertsBtn) {
+        jobAlertsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            subscribeToJobAlerts();
+        });
+    }
+});
+</script>
+
+<style>
+.job-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color, #e9ecef);
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.job-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color, #333);
+    margin-bottom: 0.5rem;
+}
+
+.job-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.job-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.job-description {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.job-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.job-badge {
+    align-self: flex-start;
+}
+
+.benefit-item {
+    padding: 2rem 1rem;
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color, #333);
+}
+
+.benefit-item p {
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+.benefit-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color, #e9ecef);
+    height: 100%;
+}
+
+.benefit-list h5 {
+    color: var(--text-color, #333);
+    margin-bottom: 1rem;
+}
+
+.benefit-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.benefit-list ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.benefit-list ul li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.process-step {
+    position: relative;
+    padding: 2rem 1rem;
+}
+
+.step-number {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.process-step h5 {
+    color: var(--text-color, #333);
+    margin-bottom: 1rem;
+}
+
+.process-step p {
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+/* Form styling */
+.form-control, .form-select {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e9ecef);
+    color: var(--text-color, #333);
+    border-radius: var(--border-radius);
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--card-bg, #ffffff);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    color: var(--text-color, #333);
+}
+
+.form-label {
+    color: var(--text-color, #333);
+    font-weight: 500;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .job-card,
+[data-theme="dark"] .benefit-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .job-title,
+[data-theme="dark"] .benefit-item h4,
+[data-theme="dark"] .benefit-list h5,
+[data-theme="dark"] .process-step h5 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .job-description,
+[data-theme="dark"] .benefit-item p,
+[data-theme="dark"] .benefit-list ul li,
+[data-theme="dark"] .process-step p {
+    color: var(--secondary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .job-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .job-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .job-actions {
+        flex-direction: column;
+    }
+    
+    .benefit-item {
+        padding: 1.5rem 1rem;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+</style>
+{% endblock %}

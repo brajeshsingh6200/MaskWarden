@@ -1,8 +1,8 @@
-# Face Mask Detection System
+# Nextwave Company Website
 
 ## Overview
 
-This is a computer vision application that detects whether people are wearing face masks in real-time video feeds. The system uses OpenCV for face detection, TensorFlow/Keras for mask classification, and provides a GUI interface for monitoring compliance. It includes violation logging, alerting capabilities, and model training functionality.
+This is a dynamic and fully responsive corporate website for Nextwave, designed to showcase the company's services, values, products, and culture. The website includes interactive features, admin control, and client engagement tools, making it a comprehensive business-ready web portal.
 
 ## User Preferences
 
@@ -11,50 +11,52 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Core Architecture
-- **Modular Design**: The system is organized into separate modules for different functionalities (face detection, mask detection, GUI, utilities)
-- **Configuration-Driven**: Centralized configuration management through `config.py`
-- **Event-Driven GUI**: Tkinter-based GUI with real-time video processing
-- **Machine Learning Pipeline**: Custom CNN model training and inference
+- **Flask Web Framework**: Modern Python web application with MVC pattern
+- **Database-Driven**: SQLite database for content management and user data
+- **Responsive Design**: Bootstrap-based responsive UI with custom CSS
+- **Admin Panel**: Comprehensive admin interface for content management
+- **Interactive Features**: Search, theme toggle, contact forms, and job applications
 
 ### Technology Stack
-- **Computer Vision**: OpenCV for face detection and video processing
-- **Machine Learning**: TensorFlow/Keras for mask classification
-- **GUI Framework**: Tkinter for the desktop interface
-- **Image Processing**: PIL/Pillow for image manipulation
-- **Data Management**: CSV logging for violation records
+- **Backend**: Flask (Python) with SQLite database
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
+- **UI Components**: Font Awesome icons, Google Fonts
+- **Features**: Dark/light theme, search functionality, form validation
+- **Admin System**: Session-based authentication and dashboard
 
 ## Key Components
 
-### 1. Face Detection (`face_detector.py`)
-- **Purpose**: Detects faces in video frames using OpenCV Haar Cascades
-- **Technology**: OpenCV CascadeClassifier
-- **Configuration**: Configurable detection parameters (scale factor, min neighbors, min size)
+### 1. Flask Application (`app.py`)
+- **Purpose**: Main web application with routing and business logic
+- **Features**: User authentication, database management, API endpoints
+- **Architecture**: MVC pattern with SQLite database integration
+- **Admin System**: Complete admin panel for content management
 
-### 2. Mask Detection (`mask_detector.py`)
-- **Purpose**: Classifies detected faces as wearing masks or not
-- **Technology**: Custom CNN model trained with TensorFlow/Keras
-- **Input**: Preprocessed face images (224x224 pixels)
-- **Output**: Binary classification with confidence scores
+### 2. Templates (`templates/`)
+- **Base Template**: Common layout with navigation and footer
+- **Public Pages**: Home, About, Services, Blog, Careers, Contact
+- **Admin Panel**: Login and dashboard for content management
+- **Responsive Design**: Bootstrap-based responsive layouts
 
-### 3. Model Training (`model_trainer.py`)
-- **Purpose**: Trains the CNN model for mask detection
-- **Architecture**: 4-layer CNN with batch normalization and dropout
-- **Features**: Data augmentation, early stopping, model checkpointing
-- **Training Data**: Expects organized directories with "with_mask" and "without_mask" categories
+### 3. Static Assets (`static/`)
+- **CSS**: Custom styling with dark/light theme support
+- **JavaScript**: Interactive features and form validation
+- **Images**: Placeholder images and company assets
+- **Bootstrap & Font Awesome**: Modern UI components and icons
 
-### 4. GUI Application (`gui_app.py`)
-- **Purpose**: Provides user interface for real-time monitoring
-- **Features**: Live video feed, statistics display, violation alerts
-- **Threading**: Uses separate threads for video processing to maintain UI responsiveness
+### 4. Database Schema**
+- **Users**: Admin authentication system
+- **Blog Posts**: Dynamic blog content management
+- **Services**: Company services and offerings
+- **Jobs**: Career opportunities and applications
+- **Contact Messages**: Client inquiries and communication
+- **Events**: Optional workshop and event management
 
-### 5. Utilities (`utils.py`)
-- **ViolationLogger**: CSV-based logging of mask violations with cooldown periods
-- **AlertManager**: Handles violation alerts and notifications
-- **VideoProcessor**: Video stream processing utilities
-
-### 6. Configuration (`config.py`)
-- **Purpose**: Centralized configuration management
-- **Settings**: Model parameters, detection thresholds, GUI settings, file paths
+### 5. Interactive Features**
+- **Search**: Global search across blog posts, services, and jobs
+- **Theme Toggle**: Dark/light mode switching
+- **Contact Forms**: Client inquiry and job application forms
+- **Admin Dashboard**: Statistics and content management interface
 
 ## Data Flow
 

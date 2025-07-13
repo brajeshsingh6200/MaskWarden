@@ -14,39 +14,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Face Mask Detection System"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "face_mask_detection"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Web Face Mask Detection"
+args = "Nextwave Website"
 
 [[workflows.workflow]]
-name = "Face Mask Detection System"
+name = "Nextwave Website"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pip install opencv-python tensorflow pillow numpy matplotlib && python main.py"
-
-[[workflows.workflow]]
-name = "face_mask_detection"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "pip install opencv-python tensorflow pillow numpy matplotlib && python main.py"
-
-[[workflows.workflow]]
-name = "Web Face Mask Detection"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python web_app.py"
+args = "python app.py"
 waitForPort = 5000
 
 [[ports]]

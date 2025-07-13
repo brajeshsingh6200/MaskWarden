@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+
+{% block title %}Services - Nextwave{% endblock %}
+
+{% block content %}
+<!-- Services Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Our Services</h1>
+                <p class="lead mb-4">
+                    Comprehensive technology solutions designed to accelerate your business growth 
+                    and digital transformation journey.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-6 mb-5">
+                <div class="service-card h-100">
+                    <div class="service-icon">
+                        <i class="{{ service.icon }} text-primary"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.description }}</p>
+                        
+                        {% if service.title == 'Web Development' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>Custom web applications</li>
+                                <li>E-commerce solutions</li>
+                                <li>Progressive Web Apps (PWAs)</li>
+                                <li>API development and integration</li>
+                                <li>Performance optimization</li>
+                            </ul>
+                        </div>
+                        {% elif service.title == 'Mobile App Development' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>Native iOS and Android apps</li>
+                                <li>Cross-platform solutions</li>
+                                <li>App Store optimization</li>
+                                <li>Mobile app maintenance</li>
+                                <li>UI/UX design for mobile</li>
+                            </ul>
+                        </div>
+                        {% elif service.title == 'Cloud Solutions' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>Cloud migration services</li>
+                                <li>Infrastructure as Code</li>
+                                <li>DevOps and CI/CD</li>
+                                <li>Serverless architecture</li>
+                                <li>Cloud security and monitoring</li>
+                            </ul>
+                        </div>
+                        {% elif service.title == 'AI & Machine Learning' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>Custom AI model development</li>
+                                <li>Data analysis and insights</li>
+                                <li>Natural language processing</li>
+                                <li>Computer vision solutions</li>
+                                <li>Predictive analytics</li>
+                            </ul>
+                        </div>
+                        {% elif service.title == 'Digital Marketing' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>SEO optimization</li>
+                                <li>Social media marketing</li>
+                                <li>Content marketing strategy</li>
+                                <li>Pay-per-click advertising</li>
+                                <li>Marketing automation</li>
+                            </ul>
+                        </div>
+                        {% elif service.title == 'Consulting' %}
+                        <div class="service-features">
+                            <h5>What we offer:</h5>
+                            <ul>
+                                <li>Digital transformation strategy</li>
+                                <li>Technology assessment</li>
+                                <li>Process optimization</li>
+                                <li>Technical due diligence</li>
+                                <li>Architecture design</li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="service-actions mt-4">
+                            <a href="{{ url_for('contact') }}" class="btn btn-primary">
+                                Get Started <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#serviceModal{{ service.id }}">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Our Process</h2>
+                <p class="section-subtitle">
+                    We follow a proven methodology to ensure successful project delivery.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-comments text-primary"></i>
+                    </div>
+                    <h4>Discovery</h4>
+                    <p>We understand your business needs, goals, and challenges through detailed consultations.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-drafting-compass text-primary"></i>
+                    </div>
+                    <h4>Planning</h4>
+                    <p>We create detailed project plans, timelines, and technical specifications.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-cogs text-primary"></i>
+                    </div>
+                    <h4>Development</h4>
+                    <p>Our expert team develops your solution using best practices and cutting-edge technologies.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-rocket text-primary"></i>
+                    </div>
+                    <h4>Launch</h4>
+                    <p>We deploy your solution and provide ongoing support to ensure success.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="section-title">Technologies We Use</h2>
+                <p class="section-subtitle">
+                    We work with the latest and most reliable technologies to deliver exceptional results.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="tech-category">
+                    <h4>Frontend</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">Vue.js</span>
+                        <span class="tech-item">Angular</span>
+                        <span class="tech-item">TypeScript</span>
+                        <span class="tech-item">Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="tech-category">
+                    <h4>Backend</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">Java</span>
+                        <span class="tech-item">C#</span>
+                        <span class="tech-item">PHP</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="tech-category">
+                    <h4>Mobile</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">React Native</span>
+                        <span class="tech-item">Flutter</span>
+                        <span class="tech-item">Swift</span>
+                        <span class="tech-item">Kotlin</span>
+                        <span class="tech-item">Xamarin</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="tech-category">
+                    <h4>Cloud</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">AWS</span>
+                        <span class="tech-item">Azure</span>
+                        <span class="tech-item">Google Cloud</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Ready to Get Started?</h2>
+                <p class="lead mb-4">
+                    Let's discuss your project requirements and see how we can help you achieve your goals.
+                </p>
+                <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-users"></i> Meet Our Team
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Detail Modals -->
+{% for service in services %}
+<div class="modal fade" id="serviceModal{{ service.id }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="{{ service.icon }} text-primary me-2"></i>
+                    {{ service.title }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">{{ service.description }}</p>
+                
+                {% if service.title == 'Web Development' %}
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Responsive design for all devices</li>
+                    <li>Modern JavaScript frameworks</li>
+                    <li>SEO optimization</li>
+                    <li>Fast loading times</li>
+                    <li>Secure and scalable architecture</li>
+                </ul>
+                <h6>Technologies Used:</h6>
+                <p>React, Vue.js, Angular, Node.js, Python, PHP, MySQL, PostgreSQL, MongoDB</p>
+                {% elif service.title == 'Mobile App Development' %}
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Native performance</li>
+                    <li>Cross-platform compatibility</li>
+                    <li>Offline functionality</li>
+                    <li>Push notifications</li>
+                    <li>App store optimization</li>
+                </ul>
+                <h6>Technologies Used:</h6>
+                <p>React Native, Flutter, Swift, Kotlin, Xamarin, Firebase</p>
+                {% elif service.title == 'Cloud Solutions' %}
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Scalable infrastructure</li>
+                    <li>Cost optimization</li>
+                    <li>High availability</li>
+                    <li>Security compliance</li>
+                    <li>Automated deployment</li>
+                </ul>
+                <h6>Technologies Used:</h6>
+                <p>AWS, Azure, Google Cloud, Docker, Kubernetes, Terraform</p>
+                {% elif service.title == 'AI & Machine Learning' %}
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Custom model development</li>
+                    <li>Data preprocessing</li>
+                    <li>Model training and optimization</li>
+                    <li>Real-time inference</li>
+                    <li>Continuous learning</li>
+                </ul>
+                <h6>Technologies Used:</h6>
+                <p>TensorFlow, PyTorch, scikit-learn, OpenAI, Hugging Face</p>
+                {% endif %}
+                
+                <div class="mt-4">
+                    <h6>Project Timeline:</h6>
+                    <p>Typical projects range from 4-16 weeks depending on complexity and requirements.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">Get Quote</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block scripts %}
+<style>
+.process-step {
+    position: relative;
+    padding: 2rem 1rem;
+}
+
+.step-number {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.tech-category {
+    background: var(--card-bg, #ffffff);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border: 1px solid var(--border-color, #e9ecef);
+}
+
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.tech-item {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.service-features {
+    margin-top: 1.5rem;
+}
+
+.service-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.service-features ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-features ul li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+</style>
+{% endblock %}

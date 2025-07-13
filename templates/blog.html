@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Nextwave{% endblock %}
+
+{% block content %}
+<!-- Blog Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Our Blog</h1>
+                <p class="lead mb-4">
+                    Stay updated with the latest technology trends, insights, and expert opinions 
+                    from our team of developers and industry professionals.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search and Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <form method="GET" class="d-flex gap-3 align-items-end">
+                    <div class="flex-grow-1">
+                        <label for="search" class="form-label">Search Posts</label>
+                        <input type="text" class="form-control" id="search" name="search" 
+                               value="{{ search_query }}" placeholder="Search by title or content...">
+                    </div>
+                    <div class="flex-shrink-0">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option value="">All Categories</option>
+                            {% for category in categories %}
+                            <option value="{{ category.category }}" 
+                                    {% if category_filter == category.category %}selected{% endif %}>
+                                {{ category.category }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Posts Section -->
+<section class="py-5">
+    <div class="container">
+        {% if posts %}
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="blog-card h-100">
+                    <div class="blog-image">
+                        <img src="{{ url_for('static', filename='images/blog-placeholder.jpg') }}" 
+                             alt="{{ post.title }}" class="img-fluid">
+                        <div class="blog-category">{{ post.category }}</div>
+                    </div>
+                    <div class="blog-content">
+                        <h5>
+                            <a href="{{ url_for('blog_post', post_id=post.id) }}">{{ post.title }}</a>
+                        </h5>
+                        <p class="blog-excerpt">{{ post.content[:200] }}...</p>
+                        <div class="blog-meta">
+                            <span class="author">
+                                <i class="fas fa-user"></i> {{ post.author }}
+                            </span>
+                            <span class="date">
+                                <i class="fas fa-calendar"></i> {{ post.created_at.split(' ')[0] }}
+                            </span>
+                        </div>
+                        <div class="blog-actions mt-3">
+                            <a href="{{ url_for('blog_post', post_id=post.id) }}" class="btn btn-primary btn-sm">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No posts found</h4>
+                <p class="text-muted">
+                    {% if search_query or category_filter %}
+                    Try adjusting your search criteria or browse all posts.
+                    {% else %}
+                    Blog posts will appear here once they are published.
+                    {% endif %}
+                </p>
+                {% if search_query or category_filter %}
+                <a href="{{ url_for('blog') }}" class="btn btn-primary">
+                    <i class="fas fa-list"></i> View All Posts
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h3 class="mb-4">Browse by Category</h3>
+                <div class="category-tags">
+                    <a href="{{ url_for('blog') }}" class="category-tag {% if not category_filter %}active{% endif %}">
+                        All Posts
+                    </a>
+                    {% for category in categories %}
+                    <a href="{{ url_for('blog', category=category.category) }}" 
+                       class="category-tag {% if category_filter == category.category %}active{% endif %}">
+                        {{ category.category }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h3 class="mb-4">Subscribe to Our Newsletter</h3>
+                <p class="lead mb-4">
+                    Get the latest tech insights and updates delivered directly to your inbox.
+                </p>
+                <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-light">
+                            <i class="fas fa-envelope"></i> Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function subscribeNewsletter(event) {
+    event.preventDefault();
+    const email = event.target.querySelector('input[type="email"]').value;
+    
+    // Simulate subscription process
+    const button = event.target.querySelector('button');
+    const originalText = button.innerHTML;
+    button.innerHTML = '<span class="loading-spinner"></span> Subscribing...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+        button.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+            event.target.reset();
+        }, 2000);
+    }, 1000);
+    
+    NextwaveJS.showNotification('Thank you for subscribing to our newsletter!', 'success');
+    return false;
+}
+
+// Auto-submit form when category changes
+document.getElementById('category').addEventListener('change', function() {
+    this.form.submit();
+});
+</script>
+
+<style>
+.blog-card {
+    background: var(--card-bg, #ffffff);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color, #e9ecef);
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.blog-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-content h5 a {
+    color: var(--text-color, #333);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.blog-content h5 a:hover {
+    color: var(--primary-color);
+}
+
+.blog-excerpt {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.blog-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-actions {
+    border-top: 1px solid var(--border-color, #e9ecef);
+    padding-top: 1rem;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--card-bg, #ffffff);
+    color: var(--text-color, #333);
+    text-decoration: none;
+    border-radius: 25px;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.category-tag:hover,
+.category-tag.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form .input-group {
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-form .form-control {
+    border: none;
+    padding: 1rem 1.5rem;
+    background: white;
+    color: #333;
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    background: white;
+    color: #333;
+}
+
+.newsletter-form .btn {
+    border: none;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .blog-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .blog-content h5 a {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .blog-actions {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .category-tag {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .category-tag:hover,
+[data-theme="dark"] .category-tag.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Search form styling */
+.form-control, .form-select {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e9ecef);
+    color: var(--text-color, #333);
+    border-radius: var(--border-radius);
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--card-bg, #ffffff);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    color: var(--text-color, #333);
+}
+
+.form-label {
+    color: var(--text-color, #333);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .blog-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .category-tags {
+        gap: 0.5rem;
+    }
+    
+    .category-tag {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .newsletter-form .input-group {
+        flex-direction: column;
+        border-radius: var(--border-radius);
+    }
+    
+    .newsletter-form .form-control {
+        border-radius: var(--border-radius);
+        margin-bottom: 1rem;
+    }
+    
+    .newsletter-form .btn {
+        border-radius: var(--border-radius);
+    }
+}
+</style>
+{% endblock %}

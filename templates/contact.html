@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Nextwave{% endblock %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Get in Touch</h1>
+                <p class="lead mb-4">
+                    Ready to start your next project? We'd love to hear from you. 
+                    Contact us today and let's discuss how we can help.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form & Info Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="contact-form">
+                    <h3 class="mb-4">Send us a Message</h3>
+                    <form method="POST" id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <select class="form-select" id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile App Development">Mobile App Development</option>
+                                <option value="Cloud Solutions">Cloud Solutions</option>
+                                <option value="AI & Machine Learning">AI & Machine Learning</option>
+                                <option value="Digital Marketing">Digital Marketing</option>
+                                <option value="Consulting">Consulting</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Support">Support</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required placeholder="Tell us about your project or inquiry..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    I'd like to receive updates about Nextwave's services and industry insights
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="contact-info">
+                    <h3 class="mb-4">Contact Information</h3>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Address</strong><br>
+                            123 Innovation Drive<br>
+                            San Francisco, CA 94105<br>
+                            United States
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong><br>
+                            <a href="tel:+15551234567" class="text-white">+1 (555) 123-4567</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            <a href="mailto:info@nextwave.com" class="text-white">info@nextwave.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Business Hours</strong><br>
+                            Mon - Fri: 9:00 AM - 6:00 PM<br>
+                            Sat: 10:00 AM - 4:00 PM<br>
+                            Sun: Closed
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Follow Us</h5>
+                        <div class="social-links">
+                            <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Find Us</h3>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.9946876859566!2d-122.39999968468195!3d37.78730897975694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c5a4c75cb%3A0x4e90a7b3e6d4b6c9!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sus!4v1627840000000!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="text-center mb-5">Frequently Asked Questions</h3>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How long does it typically take to complete a project?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Project timelines vary depending on complexity and requirements. Simple websites typically take 2-4 weeks, while complex web applications can take 8-16 weeks. We provide detailed timelines during our initial consultation.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What is your pricing structure?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our pricing depends on project scope, complexity, and timeline. We offer both fixed-price and hourly billing options. Contact us for a detailed quote based on your specific requirements.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Do you provide ongoing support after project completion?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! We offer comprehensive maintenance and support packages including bug fixes, security updates, performance optimization, and feature enhancements. Support plans can be customized based on your needs.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Can you work with our existing development team?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutely! We frequently collaborate with in-house teams, providing expertise in specific areas or additional development capacity. We're flexible and can adapt to your existing workflows and processes.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                What technologies do you specialize in?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We specialize in modern web technologies including React, Vue.js, Angular, Node.js, Python, and cloud platforms like AWS and Azure. Our team stays current with the latest industry trends and technologies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Ready to Start Your Project?</h2>
+                <p class="lead mb-4">
+                    Don't wait - let's discuss your ideas and turn them into reality.
+                </p>
+                <a href="tel:+15551234567" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+                <a href="mailto:info@nextwave.com" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-envelope"></i> Email Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation
+    const contactForm = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+    
+    // Real-time validation
+    emailInput.addEventListener('blur', function() {
+        if (this.value && !NextwaveJS.validateEmail(this.value)) {
+            this.classList.add('is-invalid');
+            showFieldError(this, 'Please enter a valid email address');
+        } else {
+            this.classList.remove('is-invalid');
+            hideFieldError(this);
+        }
+    });
+    
+    nameInput.addEventListener('blur', function() {
+        if (this.value.length < 2) {
+            this.classList.add('is-invalid');
+            showFieldError(this, 'Name must be at least 2 characters long');
+        } else {
+            this.classList.remove('is-invalid');
+            hideFieldError(this);
+        }
+    });
+    
+    messageInput.addEventListener('blur', function() {
+        if (this.value.length < 10) {
+            this.classList.add('is-invalid');
+            showFieldError(this, 'Message must be at least 10 characters long');
+        } else {
+            this.classList.remove('is-invalid');
+            hideFieldError(this);
+        }
+    });
+    
+    // Form submission
+    contactForm.addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Validate all fields
+        if (nameInput.value.length < 2) {
+            showFieldError(nameInput, 'Name must be at least 2 characters long');
+            isValid = false;
+        }
+        
+        if (!NextwaveJS.validateEmail(emailInput.value)) {
+            showFieldError(emailInput, 'Please enter a valid email address');
+            isValid = false;
+        }
+        
+        if (!subjectInput.value) {
+            showFieldError(subjectInput, 'Please select a subject');
+            isValid = false;
+        }
+        
+        if (messageInput.value.length < 10) {
+            showFieldError(messageInput, 'Message must be at least 10 characters long');
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+        submitBtn.disabled = true;
+        
+        // The form will submit normally, but we'll reset the button state after a delay
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 3000);
+    });
+    
+    function showFieldError(field, message) {
+        field.classList.add('is-invalid');
+        
+        // Remove existing error
+        const existingError = field.parentNode.querySelector('.invalid-feedback');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Add new error
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'invalid-feedback';
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+    }
+    
+    function hideFieldError(field) {
+        field.classList.remove('is-invalid');
+        const errorDiv = field.parentNode.querySelector('.invalid-feedback');
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+    }
+});
+</script>
+
+<style>
+.contact-form {
+    background: var(--card-bg, #ffffff);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color, #e9ecef);
+}
+
+.contact-info {
+    background: var(--primary-color);
+    color: white;
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    height: fit-content;
+}
+
+.contact-info h3 {
+    margin-bottom: 2rem;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.contact-info-item i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    width: 30px;
+    margin-top: 0.25rem;
+}
+
+.contact-info-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-info-item a:hover {
+    text-decoration: underline;
+}
+
+.map-container {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.accordion-item {
+    border: 1px solid var(--border-color, #e9ecef);
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: var(--card-bg, #ffffff);
+    color: var(--text-color, #333);
+    border: none;
+    padding: 1.5rem;
+    font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--primary-color);
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-body {
+    background: var(--card-bg, #ffffff);
+    color: var(--text-color, #333);
+    padding: 1.5rem;
+}
+
+.form-control, .form-select {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e9ecef);
+    color: var(--text-color, #333);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--card-bg, #ffffff);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    color: var(--text-color, #333);
+}
+
+.form-label {
+    color: var(--text-color, #333);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-check-label {
+    color: var(--text-color, #333);
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .accordion-button {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background: var(--primary-color);
+    color: white;
+}
+
+[data-theme="dark"] .accordion-body {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .contact-form {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .contact-form,
+    .contact-info {
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .contact-info-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-info-item i {
+        margin: 0 0 1rem 0;
+    }
+}
+</style>
+{% endblock %}
