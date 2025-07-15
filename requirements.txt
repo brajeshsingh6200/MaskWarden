@@ -1,0 +1,8 @@
+Flask
+Werkzeug
+opencv-python
+numpy
+Pillow
+matplotlib
+tensorflow
+keras 
